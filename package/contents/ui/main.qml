@@ -15,8 +15,10 @@
  * along with this program.  If not, see <http: //www.gnu.org/licenses/>.
  */
 import QtQuick
+import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.plasmoid
+import org.kde.plasma.components as PC3
 import org.kde.plasma.core as PlasmaCore
 
 PlasmoidItem {
@@ -27,19 +29,48 @@ PlasmoidItem {
     property bool showSearches: plasmoid.configuration.showSearches
     property int widgetWidth: plasmoid.configuration.widgetWidth
 
-    compactRepresentation: Kirigami.Icon {
-        source: 'folder-favorites'
-        width: Kirigami.Units.iconSizes.medium
-        height: Kirigami.Units.iconSizes.medium
-        active: mouseArea.containsMouse
+    compactRepresentation: RowLayout { 
+      id: appsRow
+      anchors.fill: parent
+      spacing: 0
+
+      //Kirigami.Icon {
+      //  source: 'folder-favorites'
+      //  //width: Kirigami.Units.iconSizes.medium
+      //  //height: Kirigami.Units.iconSizes.medium
+      //}
+
+      PC3.Label { 
+        Layout.fillHeight: true
+        Layout.leftMargin: Kirigami.Units.smallSpacing
+        Layout.rightMargin: Kirigami.Units.smallSpacing
+
+        text: "Places"
+        horizontalAlignment: Text.AlignLeft
+        verticalAlignment: Text.AlignVCenter
 
         MouseArea {
-            id: mouseArea
-            anchors.fill: parent
-            onClicked: plasmoidItem.expanded = !plasmoidItem.expanded
-            hoverEnabled: true
+          id: mouseArea
+          anchors.fill: parent
+          onClicked: plasmoidItem.expanded = !plasmoidItem.expanded
+          hoverEnabled: true
         }
+      }
     }
+
+    //compactRepresentation: Kirigami.Icon {
+    //    source: 'folder-favorites'
+    //    width: Kirigami.Units.iconSizes.medium
+    //    height: Kirigami.Units.iconSizes.medium
+    //    active: mouseArea.containsMouse
+    //
+    //    MouseArea {
+    //        id: mouseArea
+    //        anchors.fill: parent
+    //        onClicked: plasmoidItem.expanded = !plasmoidItem.expanded
+    //        hoverEnabled: true
+    //    }
+    //}
 
     fullRepresentation: FullRepresentation {}
 
