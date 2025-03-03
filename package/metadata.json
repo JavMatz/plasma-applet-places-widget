@@ -2,18 +2,18 @@
     "KPlugin": {
         "Authors": [
             {
-                "Email": "hessijames@gmail.com",
-                "Name": "Daniel Faust"
+                "Email": "erick97am@gmail.com",
+                "Name": "Javier Martinez"
             }
         ],
         "Category": "Application Launchers",
-        "Description": "Gives access to user places",
+        "Description": "Gives access to user places in a MATE style",
         "Icon": "folder-favorites",
-        "Id": "org.kde.placesWidget",
+        "Id": "org.kde.matelikeplacesWidget",
         "License": "GPL2",
-        "Name": "Places Widget",
+        "Name": "MATE Places Widget",
         "Version": "1.4",
-        "Website": "https://github.com/dfaust/plasma-applet-places-widget"
+        "Website": "https://github.com/JavMatz/plasma-applet-places-widget"
     },
     "X-KDE-ParentApp": "",
     "X-Plasma-API-Minimum-Version": "6.0",
