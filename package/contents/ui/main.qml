@@ -37,7 +37,7 @@ PlasmoidItem {
         const displayedIcon = menuIcon
 
         let impWidth = 0;
-        impWidth += menuIcon.width;
+        impWidth += menuIcon.visible ? menuIcon.width : 0;
         impWidth += menuLabel.contentWidth + menuLabel.Layout.leftMargin + menuLabel.Layout.rightMargin;
         const impHeight = menuIcon.height > 0 ? menuIcon.height : iconSize
         return {
@@ -64,7 +64,7 @@ PlasmoidItem {
 
         Kirigami.Icon {
           id: menuIcon
-          visible: true
+          visible: plasmoid.configuration.showIcon
           source: 'folder-favorite'
           Layout.fillHeight: true
           Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
