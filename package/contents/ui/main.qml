@@ -31,7 +31,7 @@ PlasmoidItem {
 
     compactRepresentation: MouseArea {
       id: menuMouseArea
-      anchors.fill: parent
+      readonly property bool tooSmall: Plasmoid.formFactor === PlasmaCore.Types.Horizontal && Math.round(2 * (menuMouseArea.height / 5)) <= Kirigami.Theme.smallFont.pixelSize
       readonly property int iconSize: Kirigami.Units.iconSizes.large
       readonly property var sizing: {
         const displayedIcon = menuIcon
@@ -77,10 +77,13 @@ PlasmoidItem {
           Layout.rightMargin: Kirigami.Units.smallSpacing
 
           text: i18n('Places')
+          textFormat: Text.StyledText
           horizontalAlignment: Text.AlignLeft
           verticalAlignment: Text.AlignVCenter
           wrapMode: Text.NoWrap
           fontSizeMode: Text.VerticalFit
+          font.pixelSize: menuMouseArea.tooSmall ? Kirigami.Theme.defaultFont.pixelSize : Kirigami.Units.iconSizes.roundedIconSize(Kirigami.Units.gridUnit * 2)
+          minimumPointSize: Kirigami.Theme.smallFont.pointSize
         }
       }
     }
