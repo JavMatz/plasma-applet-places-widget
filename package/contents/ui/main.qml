@@ -29,48 +29,62 @@ PlasmoidItem {
     property bool showSearches: plasmoid.configuration.showSearches
     property int widgetWidth: plasmoid.configuration.widgetWidth
 
-    compactRepresentation: RowLayout { 
-      id: appsRow
+    compactRepresentation: MouseArea {
+      id: menuMouseArea
       anchors.fill: parent
-      spacing: 0
+      readonly property int iconSize: Kirigami.Units.iconSizes.large
+      readonly property var sizing: {
+        const displayedIcon = menuIcon
 
-      //Kirigami.Icon {
-      //  source: 'folder-favorites'
-      //  //width: Kirigami.Units.iconSizes.medium
-      //  //height: Kirigami.Units.iconSizes.medium
-      //}
+        let impWidth = 0;
+        impWidth += menuIcon.width;
+        impWidth += menuLabel.contentWidth + menuLabel.Layout.leftMargin + menuLabel.Layout.rightMargin;
+        const impHeight = menuIcon.height > 0 ? menuIcon.height : iconSize
+        return {
+          preferredWidth: impWidth,
+          preferredHeight: iconSize
+        };
+      }
 
-      PC3.Label { 
-        Layout.fillHeight: true
-        Layout.leftMargin: Kirigami.Units.smallSpacing
-        Layout.rightMargin: Kirigami.Units.smallSpacing
+      implicitWidth: iconSize
+      implicitHeight: iconSize
 
-        text: "Places"
-        horizontalAlignment: Text.AlignLeft
-        verticalAlignment: Text.AlignVCenter
+      Layout.preferredWidth: sizing.preferredWidth
+      Layout.preferredHeight: sizing.preferredHeight
+      Layout.minimumWidth: Layout.preferredWidth
+      Layout.minimumHeight: Layout.preferredHeight
 
-        MouseArea {
-          id: mouseArea
-          anchors.fill: parent
-          onClicked: plasmoidItem.expanded = !plasmoidItem.expanded
-          hoverEnabled: true
+      onClicked: plasmoidItem.expanded = !plasmoidItem.expanded
+      hoverEnabled: true
+
+      RowLayout { 
+        id: menuRow
+        anchors.fill: parent
+        spacing: 0
+
+        Kirigami.Icon {
+          id: menuIcon
+          visible: true
+          source: 'folder-favorite'
+          Layout.fillHeight: true
+          Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+        }
+
+        PC3.Label { 
+          id: menuLabel
+          Layout.fillHeight: true
+          Layout.leftMargin: Kirigami.Units.smallSpacing
+          Layout.rightMargin: Kirigami.Units.smallSpacing
+
+          text: "Places"
+          horizontalAlignment: Text.AlignLeft
+          verticalAlignment: Text.AlignVCenter
+          wrapMode: Text.NoWrap
+          fontSizeMode: Text.VerticalFit
         }
       }
     }
 
-    //compactRepresentation: Kirigami.Icon {
-    //    source: 'folder-favorites'
-    //    width: Kirigami.Units.iconSizes.medium
-    //    height: Kirigami.Units.iconSizes.medium
-    //    active: mouseArea.containsMouse
-    //
-    //    MouseArea {
-    //        id: mouseArea
-    //        anchors.fill: parent
-    //        onClicked: plasmoidItem.expanded = !plasmoidItem.expanded
-    //        hoverEnabled: true
-    //    }
-    //}
 
     fullRepresentation: FullRepresentation {}
 
