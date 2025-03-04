@@ -22,7 +22,7 @@ import org.kde.plasma.components as PC3
 import org.kde.plasma.core as PlasmaCore
 
 PlasmoidItem {
-    id: plasmoidItem
+    id: matePlaces
     property bool showHidden: plasmoid.configuration.showHidden
     property bool showDevices: plasmoid.configuration.showDevices
     property bool showTimeline: plasmoid.configuration.showTimeline
@@ -54,7 +54,7 @@ PlasmoidItem {
       Layout.minimumWidth: Layout.preferredWidth
       Layout.minimumHeight: Layout.preferredHeight
 
-      onClicked: plasmoidItem.expanded = !plasmoidItem.expanded
+      onClicked: matePlaces.expanded = !matePlaces.expanded
       hoverEnabled: true
 
       RowLayout { 
@@ -64,10 +64,17 @@ PlasmoidItem {
 
         Kirigami.Icon {
           id: menuIcon
+
+          Layout.fillWidth: matePlaces.vertical
+          Layout.fillHeight: !matePlaces.vertical
+          Layout.preferredWidth: matePlaces.vertical ? -1 : height / (implicitHeight / implicitWidth)
+          Layout.preferredHeight: !matePlaces.vertical ? -1 : width * (implicitHeight / implicitWidth)
+          Layout.maximumHeight: Kirigami.Units.iconSizes.huge
+          Layout.maximumWidth: Kirigami.Units.iconSizes.huge
+          Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+
           visible: plasmoid.configuration.showIcon
           source: 'folder-favorite'
-          Layout.fillHeight: true
-          Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
         }
 
         PC3.Label { 
