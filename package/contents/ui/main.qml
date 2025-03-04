@@ -76,7 +76,7 @@ PlasmoidItem {
           Layout.leftMargin: Kirigami.Units.smallSpacing
           Layout.rightMargin: Kirigami.Units.smallSpacing
 
-          text: "Places"
+          text: i18n('Places')
           horizontalAlignment: Text.AlignLeft
           verticalAlignment: Text.AlignVCenter
           wrapMode: Text.NoWrap
