@@ -22,7 +22,7 @@ import org.kde.kirigami as Kirigami
 Kirigami.FormLayout {
     id: page
 
-    property alias cfg_showIcon: showIcon.checked
+    property alias cfg_panelButtonStyle: panelButtonStyle.currentIndex
     property alias cfg_showHidden: showHidden.checked
     property alias cfg_showDevices: showDevices.checked
     property alias cfg_showTimeline: showTimeline.checked
@@ -31,11 +31,10 @@ Kirigami.FormLayout {
 
     property var mediumSpacing: 1.5 * Kirigami.Units.smallSpacing
 
-    CheckBox {
-        id: showIcon
-        Kirigami.FormData.label: i18n('Icon')
-        text: i18n('Show Icon')
-        Layout.columnSpan: 2
+    ComboBox {
+      id: panelButtonStyle
+      Kirigami.FormData.label: i18n('Panel button style')
+      model: ["Show only icon", "Show only label", "Show label and icon"]
     }
 
     CheckBox {

@@ -27,6 +27,7 @@ PlasmoidItem {
     property bool showDevices: plasmoid.configuration.showDevices
     property bool showTimeline: plasmoid.configuration.showTimeline
     property bool showSearches: plasmoid.configuration.showSearches
+    property int panelButtonStyle: plasmoid.configuration.panelButtonStyle
     property int widgetWidth: plasmoid.configuration.widgetWidth
 
     compactRepresentation: MouseArea {
@@ -37,8 +38,8 @@ PlasmoidItem {
         const displayedIcon = menuIcon
 
         let impWidth = 0;
-        impWidth += menuIcon.visible ? menuIcon.width : 0;
-        impWidth += menuLabel.contentWidth + menuLabel.Layout.leftMargin + menuLabel.Layout.rightMargin;
+        impWidth += panelButtonStyle === 0 || panelButtonStyle === 2 ? menuIcon.width : 0;
+        impWidth += panelButtonStyle === 1 || panelButtonStyle === 2 ? menuLabel.contentWidth + menuLabel.Layout.leftMargin + menuLabel.Layout.rightMargin : 0;
         const impHeight = menuIcon.height > 0 ? menuIcon.height : iconSize
         return {
           preferredWidth: impWidth,
@@ -73,7 +74,7 @@ PlasmoidItem {
           Layout.maximumWidth: Kirigami.Units.iconSizes.huge
           Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 
-          visible: plasmoid.configuration.showIcon
+          visible: panelButtonStyle === 0 || panelButtonStyle === 2
           source: 'folder-favorite'
         }
 
@@ -91,6 +92,7 @@ PlasmoidItem {
           fontSizeMode: Text.VerticalFit
           font.pixelSize: menuMouseArea.tooSmall ? Kirigami.Theme.defaultFont.pixelSize : Kirigami.Units.iconSizes.roundedIconSize(Kirigami.Units.gridUnit * 2)
           minimumPointSize: Kirigami.Theme.smallFont.pointSize
+          visible: panelButtonStyle === 1 || panelButtonStyle === 2
         }
       }
     }

@@ -6,8 +6,9 @@
     <kcfgfile name=""/>
 
     <group name="General">
-        <entry name="showIcon" type="Bool">
-            <default>true</default>
+        <entry name="panelButtonStyle" type="Int">
+          <label>The style of the panel button: 0 = Show Only Icon, 1 = Show Only Label, 2 = Show Both</label>
+          <default>1</default>
         </entry>
         <entry name="showHidden" type="Bool">
             <default>false</default>
