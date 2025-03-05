@@ -24,8 +24,8 @@ import org.kde.plasma.plasma5support as Plasma5Support
 
 Item {
     property real mediumSpacing: 1.5 * Kirigami.Units.smallSpacing
-    property real textHeight: Kirigami.Theme.defaultFont.pixelSize + Kirigami.Theme.smallFont.pixelSize + Kirigami.Units.smallSpacing
-    property real itemHeight: Math.max(Kirigami.Units.iconSizes.medium, textHeight)
+    property real textHeight: Kirigami.Theme.defaultFont.pixelSize
+    property real itemHeight: Math.max(Kirigami.Units.iconSizes.small, textHeight)
 
     Layout.minimumWidth: widgetWidth
     Layout.minimumHeight: (itemHeight + 2*mediumSpacing) * listView.count
@@ -134,51 +134,29 @@ Item {
                     }
 
                     Row {
-                        x: mediumSpacing
-                        y: mediumSpacing
-                        width: parent.width - 2*mediumSpacing
-                        height: itemHeight
-                        spacing: mediumSpacing
+                      x: mediumSpacing
+                      y: mediumSpacing
+                      width: parent.width - 2*mediumSpacing
+                      height: itemHeight
+                      spacing: mediumSpacing
 
-                        Item { // Hack - since setting the dimensions of PlasmaCore.IconItem won't work
-                            height: Kirigami.Units.iconSizes.medium
-                            width: height
-                            anchors.verticalCenter: parent.verticalCenter
+                      Kirigami.Icon {
+                        source: model['decoration']
+                        active: isHovered
 
-                            Kirigami.Icon {
-                                anchors.fill: parent
-                                source: model['decoration']
-                                active: isHovered
-                            }
-                        }
+                        height: Kirigami.Units.iconSizes.small
+                        width: height
+                        anchors.verticalCenter: parent.verticalCenter
+                      }
 
-                        Column {
-                            width: ejectIcon.visible ? parent.width - Kirigami.Units.iconSizes.medium * 1.8 - mediumSpacing : parent.width - Kirigami.Units.iconSizes.medium - mediumSpacing
-                            height: textHeight
-                            spacing: 0
-                            anchors.verticalCenter: parent.verticalCenter
+                      PlasmaComponents.Label {
+                        text: model['display']
+                        width: parent.width
+                        height: Kirigami.Theme.defaultFont.pixelSize
+                        elide: Text.ElideRight
+                        anchors.verticalCenter: parent.verticalCenter
+                      }
 
-                            PlasmaComponents.Label {
-                                text: model['display']
-                                width: parent.width
-                                height: Kirigami.Theme.defaultFont.pixelSize
-                                elide: Text.ElideRight
-                            }
-                            Item {
-                                width: 1
-                                height: Kirigami.Units.smallSpacing
-                            }
-                            PlasmaComponents.Label {
-                                text: model['url'].toString().replace('file://', '')
-                                font.pointSize: Kirigami.Theme.smallFont.pointSize
-                                opacity: isHovered ? 1.0 : 0.6
-                                width: parent.width
-                                height: Kirigami.Theme.smallFont.pixelSize
-                                elide: Text.ElideRight
-
-                                Behavior on opacity { NumberAnimation { duration: Kirigami.Units.shortDuration * 3 } }
-                            }
-                        }
                     }
 
                     Kirigami.Icon {
